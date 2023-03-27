@@ -10,44 +10,45 @@ void merge(int pData[], int l, int m, int r) {
   int n1 = m - l + 1;
   int n2 = r - m;
 
-  int *L = (int *)malloc(n1 * sizeof(int));
-  int *R = (int *)malloc(n2 * sizeof(int));
+  int *Left = (int *)malloc(n1 * sizeof(int));
+  int *Right = (int *)malloc(n2 * sizeof(int));
+ 
   extraMemoryAllocated += n1 + n2;
 
   for (i = 0; i < n1; i++)
-    L[i] = pData[l + i];
+    Left[i] = pData[l + i];
   for (j = 0; j < n2; j++)
-    R[j] = pData[m + 1 + j];
+    Right[j] = pData[m + 1 + j];
 
   i = 0;
   j = 0;
   k = l;
 
   while (i < n1 && j < n2) {
-    if (L[i] <= R[j]) {
-      pData[k] = L[i];
+    if (Left[i] <= Right[j]) {
+      pData[k] = Left[i];
       i++;
     } else {
-      pData[k] = R[j];
+      pData[k] = Right[j];
       j++;
     }
     k++;
   }
 
   while (i < n1) {
-    pData[k] = L[i];
+    pData[k] = Left[i];
     i++;
     k++;
   }
 
   while (j < n2) {
-    pData[k] = R[j];
+    pData[k] = Right[j];
     j++;
     k++;
   }
 
-  free(L);
-  free(R);
+  free(Left);
+  free(Right);
 }
 
 void mergeSort(int pData[], int l, int r) {
